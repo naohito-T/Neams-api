@@ -32,7 +32,7 @@
 #       runner: node
 #     "any.go":
 #       runner: go run
-post-commit:
+post-merge:
   commands:
     root-commit:
       run: make post.commit
