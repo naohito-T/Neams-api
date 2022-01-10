@@ -26,7 +26,7 @@ RUN apk update && \
     apk add --virtual build-dependencies --no-cache ${DEV_PACKAGES} && \
     bundle install -j4 && \
     apk del build-dependencies
-# ローカルにある全てのファイルをイメージにコピーしています。
+# ローカルにある全てのファイルをイメージにコピーしています(これ除外なにか除外しないとイメージが軽くならない)
 COPY . .
 # 生成されたコンテナ内で実行したいコマンドを指定します
 # rails s -b 0.0.0.0というコマンドはRailsのプロセスをipアドレス0.0.0.0だけではなく、仮想マシンが持っている全てのipアドレスにバインディングしているという意味です。
