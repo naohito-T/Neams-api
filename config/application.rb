@@ -1,3 +1,6 @@
+#
+# @desc アプリ全体の設定を起重する。
+# 
 require_relative 'boot'
 
 require "rails"
