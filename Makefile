@@ -9,6 +9,10 @@ N := \e[0m
 post.commit:
 	@make _post.root.commit
 
+.PHONY: deploy
+deploy:
+	@git push heroku master
+
 
 # git logでコミットIDを出力に入れる(標準出力のみを変数に設定する)
 _post.root.commit:
