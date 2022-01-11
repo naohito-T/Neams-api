@@ -1,14 +1,29 @@
 FROM ruby:2.7.1-alpine
 # ARG Dockerfile内で使用する変数名。docker-compose.yml内で指定する
+# docker単体のbuildでも環境変数は渡せる。
+# default値を設定できる。ARG hoge="hoge"
 ARG WORKDIR
+ARG RACK_ENV
+ARG RAILS_ENV
+ARG RAILS_LOG_TO_STDOUT
+ARG RAILS_SERVE_STATIC_FILES
+ARG RAILS_MASTER_KEY
+ARG LANG
+ARG TZ
+
 # Dockerイメージで使用する環境変数を指定します。
 # ENVを使って設定した環境変数は、イメージからコンテナへ渡されます。
 # コンテナへ渡されると、コンテナ内で起動したアプリケーションで参照することができます。
 ENV RUNTIME_PACKAGES="linux-headers libxml2-dev make gcc libc-dev nodejs tzdata postgresql-dev postgresql git" \
     DEV_PACKAGES="build-base curl-dev" \
     HOME=/${WORKDIR} \
-    LANG=C.UTF-8 \
-    TZ=Asia/Tokyo
+    LANG=/${LANG} \
+    TZ=/${TZ} \
+    RACK_ENV=/${RACK_ENV} \
+    RAILS_ENV=/${RAILS_ENV} \
+    RAILS_LOG_TO_STDOUT=/${RAILS_LOG_TO_STDOUT} \
+    RAILS_SERVE_STATIC_FILES=/${RAILS_SERVE_STATIC_FILES} \
+    RAILS_MASTER_KEY=/${RAILS_MASTER_KEY}
 # ここで指定したディレクトリパスの中にRailsアプリが作成されます。
 WORKDIR ${HOME}
 # ローカルファイルにあるGemfileをコピーする。

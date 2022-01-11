@@ -7,13 +7,14 @@ setup:
     - plan: heroku-postgresql
   # config : Herokuに追加する環境変数を指定。重要な環境変数は$ heroku config:setで直接設定する。
   # Dockerを使わないRailsデプロイでは以下の環境変数が自動で設定される。
+  # ビルド時の環境変数は、それぞれ Dockerfile 内の ARG 行と一致する必要があります。
   config:
     RACK_ENV: production
     RAILS_ENV: production
     RAILS_LOG_TO_STDOUT: enabled
     RAILS_SERVE_STATIC_FILES: enabled
 # Dockerイメージのビルドを定義する場所
-build:  
+build:
   # 参照するDockerfileの場所を相対パスで指定する。
   docker:
     web: Dockerfile
@@ -26,4 +27,5 @@ run:
   # bundle exec Bundlerでインストールされたgemを使用してコマンドを実行
   # puma -C [ファイルパス] pumaを起動させ、設定ファイルを組み込むようにしている。
   # ※このrun定義がない場合は、DockerfileのCMD命令が呼ばれます。
-  web: bundle exec puma -C config/puma.rb 
+  # git push heroku [branch]で実行される。
+  web: bundle exec puma -C config/puma.rb

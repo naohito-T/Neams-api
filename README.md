@@ -25,3 +25,7 @@ publicディレクトリからの静的ファイルを提供してもらう（ap
 Docker経由の場合は、自分で本番用の環境変数を設定する必要がある。
 
 LANGについては既にDockerfileで定義しているため、その他の環境変数をconfigに定義しています。
+
+## Herokuにdeployしているもの
+
+developをしている。
