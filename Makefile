@@ -11,7 +11,7 @@ post.commit:
 
 .PHONY: deploy
 deploy:
-	@git push heroku master
+	@make _deploy.heroku
 
 
 # git logでコミットIDを出力に入れる(標準出力のみを変数に設定する)
@@ -21,3 +21,9 @@ _post.root.commit:
 	git add .;\
 	git commit -m "${VAR}";\
 	printf '${B}%s\n' "# rootディレクトリもcommitしました. commitID: ${VAR}";\
+
+# mainに変更してgit push
+# git ch してmainからpushする
+# tagをつける
+# heroku ciがあるとのこと
+_deploy.heroku:
