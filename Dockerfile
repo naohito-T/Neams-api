@@ -3,27 +3,32 @@ FROM ruby:2.7.1-alpine
 # docker単体のbuildでも環境変数は渡せる。
 # default値を設定できる。ARG hoge="hoge"
 ARG WORKDIR
-ARG RACK_ENV
-ARG RAILS_ENV
+ARG LANG="C.UTF-8"
+ARG TZ="Asia/Toky"
+# 本番では入る
+# 環境変数 RAILS_ENV を見ている
+# 上記が存在しない場合は RACK_ENV を見ている
+# それでも何もない場合は development
+ARG RACK_ENV="development"
+ARG RAILS_ENV="development"
 ARG RAILS_LOG_TO_STDOUT
 ARG RAILS_SERVE_STATIC_FILES
 ARG RAILS_MASTER_KEY
-ARG LANG
-ARG TZ
 
 # Dockerイメージで使用する環境変数を指定します。
 # ENVを使って設定した環境変数は、イメージからコンテナへ渡されます。
 # コンテナへ渡されると、コンテナ内で起動したアプリケーションで参照することができます。
 ENV RUNTIME_PACKAGES="linux-headers libxml2-dev make gcc libc-dev nodejs tzdata postgresql-dev postgresql git" \
     DEV_PACKAGES="build-base curl-dev" \
-    HOME=/${WORKDIR} \
-    LANG=/${LANG} \
-    TZ=/${TZ} \
-    RACK_ENV=/${RACK_ENV} \
-    RAILS_ENV=/${RAILS_ENV} \
-    RAILS_LOG_TO_STDOUT=/${RAILS_LOG_TO_STDOUT} \
-    RAILS_SERVE_STATIC_FILES=/${RAILS_SERVE_STATIC_FILES} \
-    RAILS_MASTER_KEY=/${RAILS_MASTER_KEY}
+    HOME=${WORKDIR} \
+    LANG=${LANG} \
+    TZ=${TZ} \
+    RACK_ENV=${RACK_ENV} \
+    RAILS_ENV=${RAILS_ENV}
+    # RAILS_LOG_TO_STDOUT=/${RAILS_LOG_TO_STDOUT} \
+    # RAILS_SERVE_STATIC_FILES=/${RAILS_SERVE_STATIC_FILES} \
+    # RAILS_MASTER_KEY=/${RAILS_MASTER_KEY}
+
 # ここで指定したディレクトリパスの中にRailsアプリが作成されます。
 WORKDIR ${HOME}
 # ローカルファイルにあるGemfileをコピーする。

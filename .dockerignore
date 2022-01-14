@@ -2,3 +2,5 @@
 .git
 .gitignore
 
+# log
+.ash_history
