@@ -26,6 +26,31 @@ Docker経由の場合は、自分で本番用の環境変数を設定する必�
 
 LANGについては既にDockerfileで定義しているため、その他の環境変数をconfigに定義しています。
 
-## Herokuにdeployしているもの
+## How To deploy ?
 
-developをしている。
+$ tree -L 1
+.
+|-- Dockerfile
+|-- Gemfile
+|-- Gemfile.lock
+|-- Makefile
+|-- README.md
+|-- Rakefile
+|-- api
+|-- app
+|-- bin
+|-- config
+|-- config.ru
+|-- db
+|-- entrypoint.sh
+|-- heroku.yml
+|-- lefthook.yml
+|-- lib
+|-- log
+|-- public
+|-- storage
+|-- test
+|-- tmp
+|-- .irbrc Rubyコンソールを実行する $libコマンド実行時に読み込まれる設定ファイル(Railsコンソール起動時にも読み込まれる)
+`-- vendor
+

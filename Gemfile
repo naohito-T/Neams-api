@@ -25,9 +25,20 @@ gem 'bootsnap', '>= 1.4.2', require: false
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
 
+# コンソール出力結果を表にする Doc: https://github.com/cldwalker/hirb
+gem 'hirb', '~> 0.7.3'
+# コンソール文字列補正 Doc: https://github.com/steakknife/hirb-unicode
+gem 'hirb-unicode-steakknife', '~> 0.0.9'
+# パスワード暗号化 Doc: https://github.com/codahale/bcrypt-ruby
+gem 'bcrypt', '~> 3.1', '>= 3.1.12'
+
+# 開発環境とテスト環境のみ対象
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+
+  # デバッグを行う時に使用するGem
+  gem 'pry-byebug', '~> 3.9'
 end
 
 group :development do
@@ -38,4 +49,6 @@ group :development do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+# これがあるとWarningでDocker buildが止まってしまう。
+# @see https://qiita.com/tatama/items/3f0f5e42cb5f75b53817
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

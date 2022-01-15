@@ -1,6 +1,6 @@
 #
-# @desc アプリ全体の設定を起重する。
-# 
+# @desc アプリ全体の設定するファイル。
+#
 require_relative 'boot'
 
 require "rails"
@@ -24,17 +24,26 @@ Bundler.require(*Rails.groups)
 
 module NeamsApi
   class Application < Rails::Application
-    # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
 
-    # Settings in config/environments/* take precedence over those specified here.
-    # Application configuration can go into files in config/initializers
-    # -- all .rb files in that directory are automatically loaded after loading
-    # the framework and any gems in your application.
+    # Railsアプリデフォルトのタイムゾーン(default 'UTC')
+    # ここで設定したタイムゾーンはRailsのTimeWithZoneクラスに影響する。
+    config.time_zone = ENV["TZ"] # Asia/Tokyo
 
-    # Only loads a smaller set of middleware suitable for API only apps.
-    # Middleware like session, flash, cookies can be added back manually.
-    # Skip views, helpers and assets when generating a new resource.
+    # DBの読み書きに使用するタイムゾーン(:local | UTC)
+    config.active.record.default_timezone = :utc
+
+    # i18n エラーメッセージやメールタイトルを他の言語に翻訳するi18nというモジュールがある。
+    # @see https://qiita.com/shimadama/items/7e5c3d75c9a9f51abdd5
+    # config.i18n.default_locale = :ja 使うか不明
+
+    # $LOAD_PATHにautoload pathを追加しない(Zeitwerk有効時はfalseが推奨)
+    # つまりconfig.add_autoload_paths_to_load_pathは、Railsが自動で読み込んでいるディレクトリパスを$LOAD_PATHに追加するかを決定します。
+    # 既に読み込んでいるのなら「require」を使わなくても読み込めるのでfalseとしています。
+    # また、「Zeitwerk（ツァイトベルク）」を使用するアプリケーションではfalseが推奨されています
+    config.add_autoload_paths_to_load_path = false
+
+    # api mode
     config.api_only = true
   end
 end
