@@ -26,4 +26,5 @@ _post.root.commit:
 # git ch してmainからpushする
 # tagをつける
 # heroku ciがあるとのこと
+# WIP
 _deploy.heroku:
