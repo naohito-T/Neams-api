@@ -28,14 +28,19 @@ module NeamsApi
 
     # Railsアプリデフォルトのタイムゾーン(default 'UTC')
     # ここで設定したタイムゾーンはRailsのTimeWithZoneクラスに影響する。
+    # アプリケーション上でTime.zone.nowを叩くと東京の現在の時間が取得できるようにになる。
     config.time_zone = ENV["TZ"] # Asia/Tokyo
 
     # DBの読み書きに使用するタイムゾーン(:local | UTC)
-    config.active.record.default_timezone = :utc
+    config.active_record.default_timezone = :utc
 
     # i18n エラーメッセージやメールタイトルを他の言語に翻訳するi18nというモジュールがある。
     # @see https://qiita.com/shimadama/items/7e5c3d75c9a9f51abdd5
-    # config.i18n.default_locale = :ja 使うか不明
+    config.i18n.default_locale = :ja
+
+    # Zeitwerkに読み込むパスを追加する方法
+    # 多数のファイルがある時はrequire地獄から抜け出せる。あまりおすすめされていない。
+    config.autoload_paths += %W(#{config.root}/lib/validator)
 
     # $LOAD_PATHにautoload pathを追加しない(Zeitwerk有効時はfalseが推奨)
     # つまりconfig.add_autoload_paths_to_load_pathは、Railsが自動で読み込んでいるディレクトリパスを$LOAD_PATHに追加するかを決定します。
