@@ -20,7 +20,8 @@ ARG RAILS_MASTER_KEY
 # コンテナへ渡されると、コンテナ内で起動したアプリケーションで参照することができます。
 ENV RUNTIME_PACKAGES="linux-headers libxml2-dev make gcc libc-dev nodejs tzdata postgresql-dev postgresql git" \
     DEV_PACKAGES="build-base curl-dev" \
-    HOME=${WORKDIR} \
+    # /app
+    HOME=/${WORKDIR} \
     LANG=${LANG} \
     TZ=${TZ} \
     RACK_ENV=${RACK_ENV} \
@@ -51,7 +52,7 @@ COPY . .
 # 生成されたコンテナ内で実行したいコマンドを指定します
 # rails s -b 0.0.0.0というコマンドはRailsのプロセスをipアドレス0.0.0.0だけではなく、仮想マシンが持っている全てのipアドレスにバインディングしているという意味です。
 # そのため、外部からアクセスできない、127.0.0.1だけではなく、外部からアクセスできる他のipアドレス（192.168.??.??）などにもバインディングされているため、仮想マシン内からだけではなく仮想マシンの外からもアクセスできます。
-CMD ["rails", "server", "-b", "0.0.0.0"]
+# CMD ["rails", "server", "-b", "0.0.0.0"]
 ##############################################
 #################  MEMO  #####################
 ##############################################

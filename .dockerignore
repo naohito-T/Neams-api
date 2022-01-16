@@ -4,3 +4,5 @@
 
 # log
 .ash_history
+.irb_history
+.local
