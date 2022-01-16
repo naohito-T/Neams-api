@@ -20,7 +20,7 @@ ARG RAILS_MASTER_KEY
 # コンテナへ渡されると、コンテナ内で起動したアプリケーションで参照することができます。
 ENV RUNTIME_PACKAGES="linux-headers libxml2-dev make gcc libc-dev nodejs tzdata postgresql-dev postgresql git" \
     DEV_PACKAGES="build-base curl-dev" \
-    # /app
+    # /app 連結してくれる。
     HOME=/${WORKDIR} \
     LANG=${LANG} \
     TZ=${TZ} \

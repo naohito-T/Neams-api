@@ -39,6 +39,9 @@ group :development, :test do
 
   # デバッグを行う時に使用するGem
   gem 'pry-byebug', '~> 3.9'
+
+  # テスト結果色付け
+  gem 'minitest-reporters', '~> 1.1', '>= 1.1.11'
 end
 
 group :development do
