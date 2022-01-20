@@ -9,6 +9,7 @@ class User < ApplicationRecord
   VALID_PASSWORD_REGEX = /\A[\w\-]+\z/
 
   # presence（プレゼンス）: true ... 入力必須を検証します。Boolean型に入力必須のバリデーションは設定しないように
+  # →ようはnameがない場合は保存されない
   # allow_blank: true ... NULL、空白の場合は検証をスキップします。
   validates :name, presence: true, length: { maximum: 30, allow_blank: true }
 
