@@ -99,3 +99,18 @@ end
 
 - value
 ユーザが入力した値が入る
+
+## クラス宣言について
+
+Zeitwerkの仕様に合ったクラスの宣言を
+Rails6から導入されたオートロードシステムの「Zeitwerk（ツァイトベルク）」の仕様で、ファイルパスと一致するクラスを宣言しないと正しく読み込まれません。
+
+つまり、
+
+「servicers」以下のファイルパス =>「user_auth/auth_token.rb」と
+クラスの宣言 => UserAuth::AuthToken を一致させる必要。
+
+何も継承しないクラスを宣言する場合は、
+
+「services」ディレクトリ直下にauth_token.rbを作成し、
+その中でAuthTokenクラスを宣言すればOK

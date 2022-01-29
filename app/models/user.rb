@@ -2,6 +2,8 @@
 # Userモデルを作成し、データベースのusersテーブルにマッピングされる。
 class User < ApplicationRecord
 
+  include Services::Tokenizable
+
   before_validation :downcase_email
 
   # gem bcrypt
