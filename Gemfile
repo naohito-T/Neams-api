@@ -31,6 +31,9 @@ gem 'hirb', '~> 0.7.3'
 gem 'hirb-unicode-steakknife', '~> 0.0.9'
 # パスワード暗号化 Doc: https://github.com/codahale/bcrypt-ruby
 gem 'bcrypt', '~> 3.1', '>= 3.1.12'
+# JWT
+gem 'jwt', '~> 2.2'
+
 
 # 開発環境とテスト環境のみ対象
 group :development, :test do

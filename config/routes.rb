@@ -10,7 +10,19 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       namespace :home do
-        resources :users, only:[:index]
+        resources :users, only:[] do
+          # ルートにidを使用しない場合に使用するオプション
+          # 通常、showアクションはuser_idを必要とします。
+          # => /api/v1/users/:user_id/current_user
+          # このオプションをつけると、パスのuser_idが不要となります。
+          # => /api/v1/users/current_user
+          get :current_user, action: :show, on: :collection
+
+          # login, logout
+          resources :user_token, only: [:create] do
+            delete :destroy, on: :collection
+          end
+        end
       end
     end
   end
