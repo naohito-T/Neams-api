@@ -26,6 +26,9 @@ module NeamsApi
   class Application < Rails::Application
     config.load_defaults 6.0
 
+    # Cookieを処理するmeddlewareを追加(APIモードにはデフォルトでない)
+    config.middleware.use ActionDispatch::Cookies
+
     # Railsアプリデフォルトのタイムゾーン(default 'UTC')
     # ここで設定したタイムゾーンはRailsのTimeWithZoneクラスに影響する。
     # アプリケーション上でTime.zone.nowを叩くと東京の現在の時間が取得できるようにになる。
